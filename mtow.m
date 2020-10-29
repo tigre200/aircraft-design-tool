@@ -81,7 +81,7 @@ for i = 1 : length(mission.segments)
         ei = find_energy_source_index(aircraft, mission.segments{i}.energy_source);
         pti = find_propulsion_type_index(aircraft, mission.segments{i}.propulsion_type);
         if is_fuel(aircraft.energy_sources{ei})
-            errordlg('Not available'); % NOT AVAILABLE
+            errordlg('HOVER Not available WITH FUEL'); % NOT AVAILABLE
             break;
         elseif is_electric(aircraft.energy_sources{ei})
             pl = aircraft.propulsion_types{pti}.fm * sqrt(2 * mission.segments{i}.density / aircraft.performance.disc_loading);
@@ -97,7 +97,7 @@ for i = 1 : length(mission.segments)
                 mf_fuel = 1 - (0.96 - 0.03 * (mach - 1));
             end
         elseif is_electric(aircraft.energy_sources{ei})
-            errordlg('Not available'); % NOT AVAILABLE
+            errordlg('CLIMB Not available WITH ELETRIC'); % NOT AVAILABLE
             break;
         end
     elseif strcmp(mission.segments{i}.type, 'vertical_climb') % Vertical climb segment
@@ -105,7 +105,7 @@ for i = 1 : length(mission.segments)
         ei = find_energy_source_index(aircraft, mission.segments{i}.energy_source);
         pti = find_propulsion_type_index(aircraft, mission.segments{i}.propulsion_type);
         if is_fuel(aircraft.energy_sources{ei})
-            errordlg('Not available'); % NOT AVAILABLE
+            errordlg('VERT CLIMB Not available WITH FUEL'); % NOT AVAILABLE
             break;
         elseif is_electric(aircraft.energy_sources{ei})
             pl = 1 / (mission.segments{i}.velocity - aircraft.propulsion_types{pti}.k_i / 2 * mission.segments{i}.velocity + aircraft.propulsion_types{pti}.k_i / 2 * sqrt(mission.segments{i}.velocity^2 + 2 * aircraft.performance.disc_loading / mission.segments{i}.density(1)) + mission.segments{i}.density(1) * aircraft.propulsion_types{pti}.tip_velocity^3 / aircraft.performance.disc_loading * aircraft.propulsion_types{pti}.ss * aircraft.propulsion_types{pti}.cd / 8); % Power loading
@@ -123,7 +123,7 @@ for i = 1 : length(mission.segments)
                 mf_fuel = 1 - (0.96 - 0.03 * (mach - 1));
             end
         elseif is_electric(aircraft.energy_sources{ei})
-            errordlg('Not available'); % NOT AVAILABLE
+            errordlg('ACCELERATION Not available WITH ELECTRIC'); % NOT AVAILABLE
             break;
         end
     elseif strcmp(mission.segments{i}.type, 'cruise') % Cruise segment
